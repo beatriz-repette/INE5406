@@ -1,0 +1,26 @@
+{
+    "grupo": {
+        "nome": "grupo 4",
+        "alunos": [{"nome": "Ana Luiza Guimarães", "matricula": "24100607"}, {"nome": "Beatriz Reis Repette", "matricula": "24103620"}]
+    },
+    "quartus": {
+        "os": "Linux",
+        "versao": "13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition",
+        "fpga": {
+            "familia": "Cyclone III",
+            "dispositivo": "EP3C5E144C7"
+        }
+    },
+    "utilizacao": {
+        "total combinational functions": 7,
+        "dedicated logic registers": 0,
+        "total pins": 11
+    },
+    "atraso": {
+        "input port": "bcd[2]",
+        "output port": "abcdefg[2]",
+        "atraso": 9.164,
+        "unidade": "ns",
+        "tipo de atraso": "FF"
+    }
+}
