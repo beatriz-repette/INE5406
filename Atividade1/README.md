@@ -19,6 +19,8 @@ Para realizar o circuito do decodificador de 7 bits, usamos códigos muito parec
 
 #### Simulação
 
+![decod7seg](https://github.com/user-attachments/assets/82009577-4d4a-4ea2-b9cf-0814def867bf)
+
 Simulamos o circuito com todos os possíveis valores de entrada (números em BCD que representam de 0 a 9) e comparamos o resultado com o valor de saída esperado (encontrado na tabela abaixo). Como o atraso crítico do nosso circuito foi de 9.164 ns, na hora de simular mantivemos cada input por 20 ns.
 
 | Número (decimal) | Codificação para display7seg |
@@ -45,6 +47,8 @@ Aqui, desenvolvemos um circuito que, a partir de um número em complemento de do
 A lógica se resume em negar a entrada bit a bit e somar '1', desconsiderando o bit mais significativo (que, de antemão, estava presente para identificar o sinal).
 
 #### Simulação
+
+![absolute jpg](https://github.com/user-attachments/assets/cdfccd1b-86e0-46af-bb59-9abf48182cd6)
 
 Assim como para os outros circuitos, montamos arquivos de teste .do e os usamos para a simulação no ModelSim. Para este circuito, definimos a troca de entrada de 30 em 30 ns, considerando o atraso crítico do circuito, de 11,394 ns. Para as entradas de teste, utilizamos tanto números negativos quanto positivos gerados aleatoriamente (em complemento de 2), tomando cuidado para não usar o valor mais negativo de um intervalo de representação. Convertíamos esses números para decimal, calculávamos seus módulos e comparávamos essas respostas às saídas do circuito, verificando se estavam corretas para todos os casos de teste.
 
@@ -91,5 +95,7 @@ PROCESS(input)
 
 
 #### Simulação
+
+![addertree](https://github.com/user-attachments/assets/b3dcb0c4-1d50-4f25-8752-dad6900cd48a)
 
 Assim como para os outros circuitos, montamos um arquivo com casos de teste em intervalos de 30 ns, respeitando o atraso crítico do circuito de 13.490 ns. Para a simulação usamos N=8, P=4 e ExtraBit=2, a fim de atender os requisitos da proposição original do circuito. Determinamos, então, várias sequências de números para serem somados, os somamos manualmente e comparamos os resultados com o output obtido, verificando todos os casos.
