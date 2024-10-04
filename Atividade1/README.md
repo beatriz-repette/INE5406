@@ -19,7 +19,7 @@ Para realizar o circuito do decodificador de 7 bits, usamos códigos muito parec
 
 #### Simulação
 
-![Print da simulacao com o ModelSim](https://drive.google.com/file/d/1AYhFOqVPcpxg3cZnUO3Wlb3olO98-GNB/view?usp=drive_link)
+![Print da simulacao com o ModelSim](https://drive.google.com/file/d/1AYhFOqVPcpxg3cZnUO3Wlb3olO98-GNB/view?usp=sharing)
 
 Simulamos o circuito com todos os possíveis valores de entrada (números em BCD que representam de 0 a 9) e comparamos o resultado com o valor de saída esperado (encontrado na tabela abaixo).
 
