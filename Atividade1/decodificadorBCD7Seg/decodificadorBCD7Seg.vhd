@@ -12,7 +12,7 @@ END decodificadorBCD7Seg;
 ARCHITECTURE arch OF decodificadorBCD7Seg IS
 	-- implementar
 BEGIN
-		abcdefg <= "0000000" when bcd = "0000" else --0
+		abcdefg <= "0000001" when bcd = "0000" else --0
 				    "1001111" when bcd = "0001" else --1
 					  "0010010" when bcd = "0010" else --2
 					  "0000110" when bcd = "0011" else --3
