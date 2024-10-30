@@ -13,6 +13,7 @@ Na implementação de ambas as versões da SAD, utilizamos os componentes: Somad
 
 #### Circuito desenvolvido
 
+Além dos componentes genéricos, temos o bloco de controle que administra os sinais de acordo com a máquina de estados, e o operativo, que usa-os de fato nos componentes combinacionais.
 Destacando o componente "subtrator absoluto": foi uma maneira que encontramos de simplificar os processos, utilizando apenas um componente em vez de dois separados. A implementação é bem básica, simplesmente definindo a partir da subtração de, primeiro, A por B e depois, B por A, qual das duas é positiva, sendo esse o sinal de saída.
 
 ```vhdl
