@@ -7,8 +7,8 @@ entity sad_operativo is
       clk, zi, ci, cpa, cpb, zsoma, csoma, csad_reg : in std_logic;
       
 		  menor : out std_logic
-		  sample_ori : IN STD_LOGIC_VECTOR (31 DOWNTO 0); -- Mem_A[end]
-		  sample_can : IN STD_LOGIC_VECTOR (31 DOWNTO 0); -- Mem_B[end]
+		  sample_ori : IN STD_LOGIC_VECTOR (31 DOWNTO 0); -- sample_ori[end]
+		  sample_can : IN STD_LOGIC_VECTOR (31 DOWNTO 0); -- sample_can[end]
 		  address : OUT STD_LOGIC_VECTOR (3 DOWNTO 0); -- end
 		  sad_value : OUT STD_LOGIC_VECTOR (13 DOWNTO 0) -- SAD
     );
@@ -25,44 +25,46 @@ end sad_operativo
 	signal end_memoria : std_logic_vector(3 downto 0);
 
 	--------- COMPONENTES----------
-	component MUX2X1 is
-		generic (N : integer);
-		port (
-			SEL : in std_logic;
-			ENT0, ENT1 : in std_logic_vector(N - 1 downto 0);
-			output : out std_logic_vector(N - 1 downto 0)
+	component mux is
+		GENERIC (N : POSITIVE := 7);
+		PORT (
+			sel: IN std_logic;
+			w0, w1: IN std_logic_vector (N-1 downto 0);
+			f: OUT std_logic_vector (N-1 DOWNTO 0)
 		);
-	end component;
-
+	END component;
+	
 	component registrador is
-		generic (N : integer);
-		port (
-			clk, carga : in std_logic;
-			d : in std_logic_vector(N - 1 downto 0);
-			q : out std_logic_vector(N - 1 downto 0)
+		GENERIC (N : POSITIVE := 8);
+		PORT (
+			clk: IN std_logic;
+			rst: IN std_logic;
+			a: IN std_logic_vector (N-1 downto 0);
+			b: OUT std_logic_vector (N-1 downto 0)
 		);
-	end component;
-
-component somador is
-		generic (N : integer);
-		port (
-			A, B : in std_logic_vector(N - 1 downto 0);
-			S : out std_logic_vector(N - 1 downto 0)
+	END component;
+	
+	component somador is
+		GENERIC (N : POSITIVE := 7);
+		PORT (
+			a: IN std_logic_vector (N-1 downto 0);
+			b: IN std_logic_vector (N-1 downto 0);
+			s: OUT std_logic_vector (N-1 DOWNTO 0)
 		);
-	end component;
-
+	END component;
+	
 	component subtrator is
-		generic (N : integer);
-		port (
-			A, B : in std_logic_vector(N - 1 downto 0);
-			S : out std_logic_vector(N - 1 downto 0)
+		GENERIC (N : POSITIVE := 7);
+		PORT (
+			a: IN std_logic_vector (N-1 downto 0);
+			b: IN std_logic_vector (N-1 downto 0);
+			s: OUT std_logic_vector (N-1 DOWNTO 0)
 		);
-	end component;
-begin
-
+	END component;
+	
 	---- contador e endereçamento
 
-	mux_i : MUX2X1
+	mux_i : mux
 	generic map(N => 5)
 	port map(zi, S_somador_cont, "00000", S_mux_cont);
 
@@ -71,43 +73,43 @@ begin
 	port map(clk, ci, S_mux_cont, S_reg_i);
 
 	menor <= not(S_reg_i(4));
-	end_memoria <= S_reg_i(3 downto 0);
+	address <= S_reg_i(3 downto 0);
 
-	somador_i : somadorover
+	somador_i : somador
 	generic map(N => 4)
-	port map(end_memoria, "0001", S_somador_cont);
+	port map(address, "0001", S_somador_cont);
 
   reg_pA0 : registrador
 	generic map(N => 8)
-	port map(clk, cpA, Mem_A(7 downto 0), S_pA0);
+	port map(clk, cpA, sample_ori(7 downto 0), S_pA0);
 
 	reg_pA1 : registrador
 	generic map(N => 8)
-	port map(clk, cpA, Mem_A(15 downto 8), S_pA1);
+	port map(clk, cpA, sample_ori(15 downto 8), S_pA1);
 
 	reg_pA2 : registrador
 	generic map(N => 8)
-	port map(clk, cpA, Mem_A(23 downto 16), S_pA2);
+	port map(clk, cpA, sample_ori(23 downto 16), S_pA2);
 
 	reg_pA3 : registrador
 	generic map(N => 8)
-	port map(clk, cpA, Mem_A(31 downto 24), S_pA3);
+	port map(clk, cpA, sample_ori(31 downto 24), S_pA3);
 
 	reg_pB0 : registrador
 	generic map(N => 8)
-	port map(clk, cpB, Mem_B(7 downto 0), S_pB0);
+	port map(clk, cpB, sample_can(7 downto 0), S_pB0);
 
 	reg_pB1 : registrador
 	generic map(N => 8)
-	port map(clk, cpB, Mem_B(15 downto 8), S_pB1);
+	port map(clk, cpB, sample_can(15 downto 8), S_pB1);
 
 	reg_pB2 : registrador
 	generic map(N => 8)
-	port map(clk, cpB, Mem_B(23 downto 16), S_pB2);
+	port map(clk, cpB, sample_can(23 downto 16), S_pB2);
 
 	reg_pB3 : registrador
 	generic map(N => 8)
-	port map(clk, cpB, Mem_B(31 downto 24), S_pB3);
+	port map(clk, cpB, sample_can(31 downto 24), S_pB3);
     
   sub0 : subtrator
 	generic map(N => 8)
@@ -125,15 +127,15 @@ begin
 	generic map(N => 8)
 	port map(S_pA3, S_pB3, S_subtrator3);
 
-  somador_0 : somadorover
+  somador_0 : somador
 	generic map(N => 8)
 	port map(S_Subtrator0, S_Subtrator1, S_Somador0);
 
-	somador_1 : somadorover
+	somador_1 : somador
 	generic map(N => 8)
 	port map(S_Subtrator2, S_Subtrator3, S_Somador1);
 
-	somador_2 : somadorover
+	somador_2 : somador
 	generic map(N => 9)
 	port map(S_Somador0, S_Somador1, S_Somador2);
 
@@ -143,7 +145,7 @@ begin
 	generic map(N => 14)
 	port map(S_reg_soma, eS_Somador2, S_SomadorTotal);
 
-	mux_14bits : MUX2X1
+	mux_14bits : mux
 	generic map(N => 14)
 	port map(zsoma, S_SomadorTotal, "00000000000000", S_mux_14bits);
 
@@ -153,8 +155,8 @@ begin
 
 	reg_SAD : registrador
 	generic map(N => 14)
-	port map(clk, csad_reg, S_reg_soma, SAD);
+	port map(clk, csad_reg, S_reg_soma, sad_value);
 
-	end_mem <= end_memoria;
+	address <= end_memoria;
 
 end arc;
