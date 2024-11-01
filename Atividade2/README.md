@@ -36,7 +36,7 @@ end behavior;
 
 #### Simulação SAD v1
 
-
+Em relação a simulação, tivemos alguns problemas. A principio, forçando os valores de MemA[end] para 00000011 e MemB[end] para 00000100, o clock com frequência de 10ns, e variações de reset e enable, obtivemos o valor da SAD variando apenas entre 0 e 1, ela não estava somando a cada iteração. Além disso, o endereço também se mantinha variando entre esses dois valores, não sendo incrementado a cada processo como era o esperado. 
 
 #### Simulação SAD v3
 
