@@ -5,7 +5,7 @@ USE ieee.numeric_std.ALL;
 entity sad_controle is
     port (
         enable, reset, clk, menor : in std_logic;
-        pronto, read_mem , zi, ci, cpa, cpb, zsoma, csoma, csad_reg : out std_logic
+        done, read_mem, zi, ci, cpa, cpb, zsoma, csoma, csad_reg: out std_logic
     );
 end sad_controle;
 
@@ -20,11 +20,11 @@ BEGIN
 		WHEN S0 =>
 			IF enable = '0' THEN
 				ProximoEstado <= S0;
-				pronto <= '1';
+				done <= '1';
 			ELSE 
 				ProximoEstado <= S1;
 			END IF;
-			 pronto <= '1';
+			 done <= '1';
 			 read_mem <= '0'; 
 			 zi <= '0' ;
 			 ci <= '0' ;
@@ -36,7 +36,7 @@ BEGIN
 			
 		WHEN S1 =>
 			ProximoEstado <= S2;
-			 pronto <= '0';
+			 done <= '0';
 			 read_mem <= '0'; 
 			 zi <= '1' ;
 			 ci <= '1' ;
@@ -52,7 +52,7 @@ BEGIN
 			 else
 				ProximoEstado <= S5;
 			 end if;
-			 pronto <= '0';
+			 done <= '0';
 			 read_mem <= '0'; 
 			 zi <= '0' ;
 			 ci <= '0' ;
@@ -64,7 +64,7 @@ BEGIN
 			 
 		WHEN S3 =>
 			ProximoEstado <= S4;
-			 pronto <= '0';
+			 done <= '0';
 			 read_mem <= '1'; 
 			 zi <= '0' ;
 			 ci <= '0' ;
@@ -76,7 +76,7 @@ BEGIN
 			
 		WHEN S4 =>
 			ProximoEstado <= S2;
-			pronto <= '0';
+			done <= '0';
 			 read_mem <= '0'; 
 			 zi <= '0' ;
 			 ci <= '1' ;
@@ -88,7 +88,7 @@ BEGIN
 			
 		WHEN S5 =>
 			ProximoEstado <= S0;
-			pronto <= '0';
+			done <= '0';
 			 read_mem <= '0'; 
 			 zi <= '0' ;
 			 ci <= '0' ;
