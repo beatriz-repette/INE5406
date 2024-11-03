@@ -40,3 +40,5 @@ Em relação a simulação, tivemos alguns problemas. A principio, forçando os 
 
 #### Simulação SAD v3
 
+No caso da SAD v3, tivemos basicamente o mesmo problema. Setando valores para sample_ori e sample_can com a quantidade de bits apropriada, obtivemos o sad_value variando apenas entre 0 e 1. 
+
