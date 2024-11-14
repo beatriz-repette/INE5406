@@ -1,0 +1,22 @@
+{
+    "grupo": {
+        "nome": "grupo 4",
+        "alunos": [{"nome": "Ana Luiza Guimarães", "matricula": "24100607"}, {"nome": "Beatriz Reis Repette", "matricula": "24103620"}]
+    },
+    "quartus": {
+        "os": "Linux",
+        "versao": "Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition",
+        "fpga": {
+            "familia": "Cyclone III",
+            "dispositivo": "EP3C5E144C7"
+        }
+    },
+    "utilizacao": {
+        "total combinational functions": 54,
+        "dedicated logic registers": 57,
+        "total pins": 41
+    },
+    "atraso": {
+        "Fmax": "177.27 MHz"
+    }
+}
