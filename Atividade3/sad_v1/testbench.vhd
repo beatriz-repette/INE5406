@@ -29,33 +29,18 @@ begin
         clk, enable, reset, sample_ori, sample_can, read_mem, address, sad_value, done
       );
 
-  stim: process is
-    file arquivo_de_estimulos : text open read_mode is "../../estimulos.dat";
-    variable linha_de_estimulos: line;
-    variable espaco: character;
-    variable valor_de_entrada_A: bit_vector(7 downto 0);
-    variable valor_de_entrada_B: bit_vector(7 downto 0);
-    variable valor_de_saida: bit_vector(13 downto 0);
-	 begin
-	 
-    while not endfile(arquivo_de_estimulos) loop
-      -- read inputs
-      readline(arquivo_de_estimulos, linha_de_estimulos);
-      read(linha_de_estimulos, valor_de_entrada_A);
-      read(linha_de_estimulos, valor_de_entrada_B);
-      sample_ori  <= to_stdlogicvector (valor_de_entrada_A);
-      sample_can <= to_stdlogicvector (valor_de_entrada_B);
-      read(linha_de_estimulos, espaco);
-      read(linha_de_estimulos, valor_de_saida);
-      wait for passo;
-        assert (output = to_stdlogicvector(valor_de_saida)) 
-          report  
-            "Falha na simulacao. "
-          severity error;
-    end loop;
+  process
+  begin
+    enable <= '0', '1' after 20 ns;
+    wait for 9*passo;
+    sample_ori <= std_logic_vector(to_unsigned(1, sample_ori'length));
+    sample_can <= std_logic_vector(to_unsigned(0, sample_can'length));
+    wait for 9*passo;
+    sample_ori <= std_logic_vector(to_unsigned(1, sample_ori'length));
+    sample_can <= std_logic_vector(to_unsigned(0, sample_can'length));
+    assert(sad_value='00000010000000')
+    report "Falha na simulação" severity error; 
 
-    wait for passo;
-    assert false report "Test done." severity note;
-    wait;
-  end process;
+    wait for 20 ns;
+    assert false report "Acabou" severity note;
 end tb;
