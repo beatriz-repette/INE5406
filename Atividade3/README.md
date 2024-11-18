@@ -13,7 +13,7 @@ Seguindo com os projetos desenvolvidos para o relatorio 3, nessa etapa tivemos c
 
 ## SAD_v1
 
-Nessa parte, corrigimos os problemas que ja estavam presentes na entrega do ultimo relatorio e atualizamos os arquivos vhdl, e relatorio.json. Com ajuda do professor Ismael, identificamos e corrigimos problemas com a descricao de component de um dos nossos registradores, com o numero de bits de determinados sinais, com a nao eclaracao do sinal "reset" em alguns dos arquivos e, tambem, mudamos a declaracao do numero de bits para deixa-la e funcao de 'B'.
+Nessa parte, corrigimos os problemas que ja estavam presentes na entrega do ultimo relatorio e atualizamos os arquivos vhdl, e relatorio.json. Com ajuda do professor Ismael, identificamos e corrigimos problemas com a descricao de component de um dos nossos registradores, com o numero de bits de determinados sinais, com a nao declaracao do sinal "reset" em alguns dos arquivos e, tambem, mudamos a declaracao do numero de bits para deixa-la e funcao de 'B'.
 
 #### Elaboracao do testbench
 
@@ -29,4 +29,4 @@ Tambem tinhamos problemas com o SAD_v3 ja do relatorio anterior, entao comecamos
 
 #### Elaboracao do Golden Model
 
-(terminar depois)
+Criamos o nosso golden model em python, utilizando a biblioteca "numpy" que ajuda bastante na realizacao de operacoes em matrizes. O nosso programa gera matrizes A e B (8x8) de elementos de 8 bits e calcula a soma da diferenca absoluta dos elementos correspondentes (|A[1,1] - B[1,1]| + |A[1,2] - B[1,2] + ....), isso eh gerado 50 vezes, para os 50 testes. Ao final da execucao do programa sao printados o contedo das matrizes A e B e o resultado esperado para o valor de saida da SAD, todos em binario.
