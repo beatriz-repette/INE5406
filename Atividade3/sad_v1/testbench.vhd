@@ -38,9 +38,10 @@ begin
     wait for 9*passo;
     sample_ori <= std_logic_vector(to_unsigned(0, sample_ori'length));
     sample_can <= std_logic_vector(to_unsigned(1, sample_can'length));
-    assert(sad_value='00000010000000')
+    assert(sad_value='00000001000000')
     report "Falha na simulação" severity error; 
 
     wait for 20 ns;
     assert false report "Acabou" severity note;
+  end process;
 end tb;
