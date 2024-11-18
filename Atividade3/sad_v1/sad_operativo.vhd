@@ -62,7 +62,8 @@ architecture arch of sad_operativo is
     signal s1, s2, sfinal: std_logic_vector (B-2 downto 0);
 
 -- Sinais circuitao
-    signal pa, pb, sub: std_logic_vector (B-1 downto 0);
+    signal pa, pb: std_logic_vector (B-1 downto 0);
+    signal sub: std_logic_vector (B downto 0);
     signal sum, smux, sreg, finall: std_logic_vector (B+5 downto 0);
 
 
@@ -73,7 +74,7 @@ architecture arch of sad_operativo is
 	BEGIN
     mux_i : mux
     generic map (N => B-1)
-    port map(zi, sfinal, std_LOGIC_VECTOR(resize(unsigned('0'), B-1)), s1);
+    port map(zi, sfinal, std_LOGIC_VECTOR(resize(unsigned('0'), B-1)), s1); -- se der problema trocar pra std_logic_vector(to_unsigned(0, B-1))
     
     reg_i : registrador
     generic map (N => B-1)
