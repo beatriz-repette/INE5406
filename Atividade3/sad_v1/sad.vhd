@@ -26,11 +26,11 @@ ENTITY sad IS
 		clk : IN STD_LOGIC; -- ck
 		enable : IN STD_LOGIC; -- iniciar
 		reset : IN STD_LOGIC; -- reset
-		sample_ori : IN STD_LOGIC_VECTOR (7 DOWNTO 0); -- Mem_A[end]
-		sample_can : IN STD_LOGIC_VECTOR (7 DOWNTO 0); -- Mem_B[end]
+		sample_ori : IN STD_LOGIC_VECTOR (B-1 DOWNTO 0); -- Mem_A[end]
+		sample_can : IN STD_LOGIC_VECTOR (B-1 DOWNTO 0); -- Mem_B[end]
 		read_mem : OUT STD_LOGIC; -- read
-		address : OUT STD_LOGIC_VECTOR (5 DOWNTO 0); -- end
-		sad_value : OUT STD_LOGIC_VECTOR (13 DOWNTO 0); -- SAD
+		address : OUT STD_LOGIC_VECTOR (5 DOWNTO 0); -- end / Para 64 amostras por bloco
+		sad_value : OUT STD_LOGIC_VECTOR (B+5 DOWNTO 0); -- SAD / ceil(log2( (2^B - 1) * 64)) - 1 = B + 6 - 1 = B + 5
 		done: OUT STD_LOGIC -- pronto
 	);
 END ENTITY; -- sad
@@ -39,11 +39,11 @@ ARCHITECTURE arch OF sad IS
 
 	component sad_operativo is
 	port(
-        sample_ori : IN STD_LOGIC_VECTOR (7 DOWNTO 0); -- Mem_A[end]
-		sample_can : IN STD_LOGIC_VECTOR (7 DOWNTO 0); -- Mem_B[end]
+        sample_ori : IN STD_LOGIC_VECTOR (B-1 DOWNTO 0); -- Mem_A[end]
+		sample_can : IN STD_LOGIC_VECTOR (B-1 DOWNTO 0); -- Mem_B[end]
 		clk, zi, ci, cpa, cpb, zsoma, csoma, csad_reg, reset : in std_logic;
 		menor : out std_logic;
-		sad_value : OUT STD_LOGIC_VECTOR (13 DOWNTO 0); -- SAD
+		sad_value : OUT STD_LOGIC_VECTOR (B+5 DOWNTO 0); -- SAD
 		address : OUT STD_LOGIC_VECTOR (5 DOWNTO 0) -- end
 	);
 	end component;
