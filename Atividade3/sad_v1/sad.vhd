@@ -38,6 +38,7 @@ END ENTITY; -- sad
 ARCHITECTURE arch OF sad IS
 
 	component sad_operativo is
+  generic (B: positive := B);
 	port(
         sample_ori : IN STD_LOGIC_VECTOR (B-1 DOWNTO 0); -- Mem_A[end]
 		sample_can : IN STD_LOGIC_VECTOR (B-1 DOWNTO 0); -- Mem_B[end]
@@ -63,6 +64,7 @@ BEGIN
 	port map(enable, reset, clk, menor, done, read_mem, zi, ci, cpa, cpb, zsoma, csoma, csad_reg);
 
 	datapath: sad_operativo 
+  generic map (B => B)
 	port map(sample_ori, sample_can, clk, zi, ci, cpa, cpb, zsoma, csoma, csad_reg, reset, menor, sad_value, address);
 	
 	
