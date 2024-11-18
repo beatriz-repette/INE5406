@@ -17,7 +17,7 @@ Nessa parte, corrigimos os problemas que ja estavam presentes na entrega do ulti
 
 #### Elaboracao do testbench
 
-...
+A elaboração do testbench foi relativamente simples principalmente se comparada ao da SAD v3, já que não houve necessidade de leitura de um arquivo de texto para assumir os valores de entrada e saída. Sobre esse aspecto, o testbench assumia os valores de 1 e 0 iniciais para as entradas A e B e deve retornar o valor 64 como saida do sad_value. Além disso, testamos a entrada enable, forçando seu valor para 1 apenas após um passo.
 
 #### Testagem com o testbench
 
