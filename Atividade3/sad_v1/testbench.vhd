@@ -44,7 +44,7 @@ begin
     assert(sad_value="00000001000000")
     report "Falha na simulação" severity error; 
 
-    wait for 20 ns;
+    wait for passo;
     assert false report "Acabou" severity note;
   end process;
 end tb;
