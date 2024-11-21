@@ -21,7 +21,7 @@ A elaboração do testbench foi relativamente simples principalmente se comparad
 
 #### Testagem com o testbench
 
-...
+O testbench da SAD_v3 consiste em ler o arquivo .dat que contém as matrizes que representam cada entrada e a saída esperada, criadas aleatoriamente pelo golden model. Com isso em mente, o testbench itera sobre todas as linhas do arquivo de texto, atribuindo os valores das entradas e da saída aos seus respectivos sinais.
 
 ## SAD_v3
 
